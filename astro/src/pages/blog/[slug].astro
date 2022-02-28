@@ -10,14 +10,14 @@ export async function getStaticPaths({rss}) {
   const allBlogPosts = await client.fetch(allPosts);
 
   rss({
-    title: 'Example Blog',
+    title: 'Urosystem\'s Bladder Blog',
     description: 'An example blog on Astro',
     customData: `<language>en-us</language>`,
     items: allBlogPosts.map(item => ({
       title: item.title,
-      description: item.description,
+      description: item.excerpt,
       link: `/blog/${item.slug.current}`,
-      pubDate: item.publishedAt,
+      pubDate: item.publishedAt || null,
     })),
   });
   return allBlogPosts.map(post => ({params: { slug: post.slug.current }, props: {post}}));
@@ -26,11 +26,17 @@ export async function getStaticPaths({rss}) {
 const { post } = Astro.props;
 ---
 
-<BlogPostLayout title={post.title}  ogImageUrl={getSanityImageUrl(post.mainImage).width(1200).url()} >
+<BlogPostLayout title={post.title}  ogImageUrl={post.mainImage && getSanityImageUrl(post.mainImage).width(1200).url()} >
+  <BlogPost post={post} />
   <ul>
     {post.categories.map(category => (
-      <li><a href={`/blog/category/${category.slug.current}`}>{category.title}</a></li>
+      <li><button><a href={`/blog/category/${category.slug.current}`}>{category.title}</a></button></li>
     ))}
   </ul>
-   <BlogPost post={post} />
 </BlogPostLayout>
+
+<style>
+  button {
+    @apply indicator indicator-center;
+  }
+</style>

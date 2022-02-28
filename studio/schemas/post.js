@@ -32,6 +32,11 @@ export default {
       },
     },
     {
+      name: 'imageHero',
+      title: 'Hero image',
+      type: 'boolean',
+    },
+    {
       name: 'categories',
       title: 'Categories',
       type: 'array',

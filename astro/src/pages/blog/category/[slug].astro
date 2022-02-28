@@ -1,6 +1,8 @@
 ---
 // Component Imports
 import BlogPostLayout from '../../../layouts/BlogPostLayout.astro'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import Wrapper from '../../../components/Wrapper.astro'
 import BlogPostPreview from '../../../components/BlogPostPreview.astro'
 import {client} from '../../../lib/sanityClient.js'
 // import { getSanityImageUrl } from '../../../utils/helpers.js';
@@ -13,11 +15,40 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props;
+//console.log({category})
 ---
 
 <BlogPostLayout title={category.title} >
-    <h1>All Posts Tagged with "{category.title}"</h1>
-    {category.posts.map((post) => (
-       <BlogPostPreview post={post} />
-    ))}
+<header>
+  <div class="text-center hero-content text-neutral-content">
+    <!--<img width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />-->
+    <div class="max-w-md">
+      <h1>All Posts Tagged with "{category.title}"</h1>
+    </div>
+  </div>
+</header>
+<main id="content">
+  <section>
+    {category.posts.map((post) => <BlogPostPreview post={post} />)}
+    {category.posts.map((post) => <BlogPostPreview post={post} />)}
+  </section>
+</main>
 </BlogPostLayout>
+
+<style>
+  header {
+    @apply hero;
+    min-height: 50vh;
+    margin-top: -4rem;
+    /*padding-top: 4rem;*/
+  }
+  main {
+    @apply container mx-auto;
+  }
+
+section {
+  min-height: 50vh;
+  height: 50vh;
+}
+
+</style>
