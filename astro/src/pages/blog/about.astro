@@ -21,7 +21,6 @@ let mainImgUrl = 'https://cdn.sanity.io/images/mj1r5gb1/production/b457de559f315
 const allPostData = await client.fetch(allPosts);
 
 ---
-<!DOCTYPE html>
 <BaseLayout title={title} description={description} permalink={permalink} canonicalURL={Astro.request.canonicalURL.href}>
 <header style={`background-image: url(${mainImgUrl})`}>
   <div class="hero-overlay bg-opacity-60"></div>
