@@ -48,7 +48,7 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
   </article>
   <aside>
       {post.categories.map(category => (
-        <label tabindex="0"><a href={`/blog/category/${category.slug.current}`}>{category.title}</a></label>
+        <label tabindex="0"><a href={`/blog/category/${category.slug.current}`}>#{category.title}</a></label>
       ))}
   </aside>
 
@@ -66,7 +66,7 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
     }
   }
   main {
-    @apply container mx-auto;
+    @apply container mx-auto py-16;
     max-width: 1280px;
   }
   article {
@@ -78,10 +78,10 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
     word-break: break-word;
   }
   aside {
-    @apply mx-auto prose md:prose-lg lg:prose-xl prose-a:underline prose-a:decoration-dotted;
-    display: flex;
+    @apply mx-auto prose md:prose-lg lg:prose-xl prose-a:underline prose-a:decoration-dotted flex flex-row gap-4 justify-center;
+    /*display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;*/
     align-items: center;
     margin-block: 2rem;
   }
