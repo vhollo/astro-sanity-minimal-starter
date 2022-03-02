@@ -13,7 +13,7 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
 ---
 
 {!!post.imageHero && <header style={`background-image: url('${mainImgUrl}')`}>
-  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-overlay"></div>
   <div class="text-center hero-content text-neutral-content">
     <!--<img width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />-->
     <div class="max-w-md">
@@ -31,7 +31,7 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
   </div>
 </header>}
 <main id="content">
-  {!post.imageHero && <img data={post.mainImage} width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />}
+  {!post.imageHero && <img data={post.mainImage} loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />}
   <aside>
     {!post.imageHero && post.author && (
       <figure class="avatar">
@@ -47,6 +47,12 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
     <h4 class="py-6 mb-5">{post.excerpt}</h4>
     <SanityBlockContent blocks={post.body} />
   </article>
+  <aside>
+      {post.categories.map(category => (
+        <label tabindex="0"><a href={`/blog/category/${category.slug.current}`}>{category.title}</a></label>
+      ))}
+  </aside>
+
 </main>
 
 <style>
@@ -78,7 +84,6 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-inline: auto;
     margin-block: 2rem;
   }
   .avatar {
@@ -96,8 +101,10 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
   }
   main > img {
     position: relative;
-    width: 100%;
-    @apply rounded-lg shadow-2xl
+    width: auto;
+    max-width: 100%;
+    max-height: 50vh;
+    @apply rounded-lg shadow-2xl mx-auto
   }
   time {
     font-size: smaller;

@@ -28,11 +28,6 @@ const { post } = Astro.props;
 
 <BlogPostLayout title={post.title}  ogImageUrl={post.mainImage && getSanityImageUrl(post.mainImage).width(1200).url()} >
   <BlogPost post={post} />
-  <ul>
-    {post.categories.map(category => (
-      <li><button><a href={`/blog/category/${category.slug.current}`}>{category.title}</a></button></li>
-    ))}
-  </ul>
 </BlogPostLayout>
 
 <style>
