@@ -15,7 +15,6 @@ const mainImgUrl = getSanityImageUrl(post.mainImage).url()
 {!!post.imageHero && <header style={`background-image: url('${mainImgUrl}')`}>
   <div class="hero-overlay"></div>
   <div class="text-center hero-content text-neutral-content">
-    <!--<img width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />-->
     <div class="max-w-md">
       <h1>{post.title}</h1>
       {post.author && (<figure class="avatar">
