@@ -1,24 +1,14 @@
 ---
-// Component Imports
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import BlogPostPreview from '../../components/BlogPostPreview.astro';
 
 import { client } from '../../lib/sanityClient.js';
 import { allPosts } from '../../lib/api.js';
 
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
 let title = 'The Bladder Blog';
-let description = `Our company, Urosystem Ltd. is focused on spreading awareness of IC/BPS and encourages you to share our content with anyone who is affected by this disease. We hope you enjoy the read and find any helpful tips throughout this page!  
-<br>
-<br>
-Yours truly, UroSystem Team.`;
+let description = `Our company, Urosystem Ltd. is focused on spreading awareness of IC/BPS and encourages you to share our content with anyone who is affected by this disease. We hope you enjoy the read and find any helpful tips throughout this page! <br><br> Yours truly, UroSystem Team.`;
 let permalink = 'https://www.urosystem.com/blog';
-//let mainImgUrl = 'https://cdn.sanity.io/images/mj1r5gb1/production/b457de559f3157bf307655ada6c4ab9903456e84-1280x853.png';
 let mainImgUrl = '/assets/pixabay-ground-cherry-6993059.svg';
-//let mainImgUrl = '/assets/urodapter_YOUTUBE_cover_03_web.png';
 
 const allPostData = await client.fetch(allPosts);
 
@@ -27,7 +17,6 @@ const allPostData = await client.fetch(allPosts);
 <header style={`background-image: url(${mainImgUrl})`}>
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="text-center hero-content text-neutral-content flex-col">
-    <!--<img width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />-->
     <div class="max-w-md">
       <h1 class="mb-5 text-5xl font-bold">{title}</h1>
 
@@ -36,7 +25,6 @@ const allPostData = await client.fetch(allPosts);
     <div class="card w-auto shadow-xl image-full">
       <form class="card-body" name="Blog_subscribe" method="POST" netlify>
         <h2 class="card-title">Subscribe to get monthly news</h2>
-          <!--<label for="email">Subscribe to get monthly news</label>-->
           <fieldset class="flex gap-4">
             <input id="email" type="email" required placeholder="Your Email" class="input input-bordered input-md flex-auto">
             <a href="#content"><button tabindex="0" class="btn btn-primary flex-none">Subscribe</button></a>
