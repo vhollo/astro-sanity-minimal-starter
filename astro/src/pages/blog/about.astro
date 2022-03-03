@@ -2,9 +2,11 @@
 // Component Imports
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import BlogPostPreview from '../../components/BlogPostPreview.astro';
+import SanityBlockContent from '../../components/SanityBlockContent.jsx'
+import { getSanityImageUrl } from '../../utils/helpers.js'
 
 import { client } from '../../lib/sanityClient.js';
-import { allPosts } from '../../lib/api.js';
+import { allAuthors } from '../../lib/api.js';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
@@ -15,13 +17,13 @@ let description = `This blog aims to help interstitial cystitis bladder pain syn
 <br>
 <br>
 Yours truly, UroSystem Team.`;
-let permalink = 'https://blog.urosystem.com/';
+let permalink = 'https://www.urosystem.com/blog/about';
 let mainImgUrl = 'https://cdn.sanity.io/images/mj1r5gb1/production/b457de559f3157bf307655ada6c4ab9903456e84-1280x853.png';
 
-const allPostData = await client.fetch(allPosts);
+const allAuthorData = await client.fetch(allAuthors);
 
 ---
-<BaseLayout title={title} description={description} permalink={permalink} canonicalURL={Astro.request.canonicalURL.href}>
+<BaseLayout title={`${title} – Our authors`} description={description} permalink={permalink} canonicalURL={Astro.request.canonicalURL.href}>
 <header style={`background-image: url(${mainImgUrl})`}>
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="text-center hero-content text-neutral-content">
@@ -30,11 +32,24 @@ const allPostData = await client.fetch(allPosts);
       <h1 class="mb-5 text-5xl font-bold">{title}</h1>
 
       <p class="mb-5">{description}</p>
-      <a href="/blog#content"><label tabindex="0" class="btn btn-primary">Start reading</label></a>
+      <a href="/blog/about#team"><label tabindex="0" class="btn btn-primary">Meet our team</label></a>
     </div>
   </div>
 </header>
-
+<main id="team">
+  {allAuthorData.map(author => (
+  <article>
+    <aside>
+      <div>
+        <h1 class="">{author.name}</h1>
+        <SanityBlockContent blocks={author.bio} />
+        <!--<button class="btn btn-sm btn-rounded">Start reading</button>-->
+      </div>
+      {author.image && <img loading="lazy" src={getSanityImageUrl(author.image).url()}>}
+    </aside>
+  </article>
+  ))}
+</main>
 </BaseLayout>
 
 <style>
@@ -50,4 +65,20 @@ const allPostData = await client.fetch(allPosts);
     height: 50vh;
   }*/
 
+  article {
+    @apply hero bg-base-200 my-16;
+    min-height: 25vh;
+  }
+  aside {
+    @apply flex-col hero-content lg:flex-row-reverse px-8;
+    width: 100%;
+    gap: 4rem;
+    justify-content: space-between;
+  }
+  aside > img {
+    @apply max-w-xs rounded-lg shadow-2xl
+  }
+  h1 {
+    @apply text-2xl font-bold
+  }
 </style>

@@ -44,9 +44,14 @@ article p a, article p a:visited, article li > a, article li > a:visited {
   min-height: unset;
   line-height: 2.5rem;
   white-space: nowrap;
+  border-radius: 1.75rem;
 }
 
 [data-theme="dark"] .input-md {
   height: 2.5rem;
   font-size: 1rem;
+}
+
+[data-theme="dark"] input[type='checkbox'] {
+  --tw-border-opacity: 1;
 }

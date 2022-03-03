@@ -21,7 +21,6 @@ module.exports = {
           "neutral-content": "#dfeef6",
           "base-100": "#0b3b54",
           "base-content": "#dfeef6",
-          "--rounded-btn": "1.75rem",
         },
       },
     ],

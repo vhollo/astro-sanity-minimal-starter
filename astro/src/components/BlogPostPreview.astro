@@ -11,8 +11,8 @@ const { post } = Astro.props;
 ---
 
     <a href={`/blog/${post.slug.current}`}>
-      <article class="">
-        <aside class="">
+      <article>
+        <aside>
           {post.mainImage && <img width="720" height="420" class="" loading="lazy" src={getSanityImageUrl(post.mainImage).url()}>
           <div>
             <time>{formatBlogPostDate(post.publishedAt) || 'This post is older than 2 years'}</time>
@@ -35,7 +35,7 @@ const { post } = Astro.props;
 
 <style>
   article {
-    @apply hero bg-base-200;
+    @apply hero bg-base-200 my-16;
     min-height: 50vh;
   }
   aside {

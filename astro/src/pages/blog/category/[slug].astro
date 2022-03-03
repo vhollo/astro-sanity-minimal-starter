@@ -15,10 +15,14 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props;
-//console.log({category})
+let description = `Our company, Urosystem Ltd. is focused on spreading awareness of IC/BPS and encourages you to share our content with anyone who is affected by this disease. We hope you enjoy the read and find any helpful tips throughout this page!  
+<br>
+<br>
+Yours truly, UroSystem Team.`;
+
 ---
 
-<BlogPostLayout title={category.title} >
+<BaseLayout title={`${category.title} – The Bladder Blog`} description={description} >
 <header>
   <div class="text-center hero-content text-neutral-content">
     <!--<img width="720" height="420" loading="lazy" src={getSanityImageUrl(post.mainImage).url()} />-->
@@ -33,7 +37,7 @@ const { category } = Astro.props;
     {category.posts.map((post) => <BlogPostPreview post={post} />)}
   </section>
 </main>
-</BlogPostLayout>
+</BaseLayout>
 
 <style>
   header {
@@ -48,7 +52,6 @@ const { category } = Astro.props;
 
 section {
   min-height: 50vh;
-  height: 50vh;
 }
 
 </style>
